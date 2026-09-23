@@ -12,7 +12,7 @@ function saveTechnicalRecord(payload) {
     const spreadsheetId = payload.spreadsheet_id || Config.spreadsheetId();
     // Asegura el trigger antes de modificar la hoja tecnica.
     try {
-      ensureFormSubmitTrigger_(spreadsheetId);
+      // ensureFormSubmitTrigger_(spreadsheetId);
     } catch (error) {
       // La falta de permisos para crear el trigger no impide guardar el registro tecnico.
     }
