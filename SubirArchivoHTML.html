@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 15px;
+        color: #333;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      input[type="file"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #f9f9f9;
+      }
+      button {
+        background-color: #0b57d0;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #0842a0;
+      }
+      #estado {
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .exito { color: #0f9d58; }
+      .error { color: #d93025; }
+      .cargando { color: #f4b400; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <label for="archivoPdf"><b>Selecciona el PDF Firmado desde tu equipo:</b></label>
+      <input type="file" id="archivoPdf" accept="application/pdf">
+      <button id="btnSubir" type="button">Subir y Guardar Enlace</button>
+      <div id="estado"></div>
+    </div>
+
+    <script>
+      const input = document.getElementById('archivoPdf');
+      const divEstado = document.getElementById('estado');
+      const btnSubir = document.getElementById('btnSubir');
+
+      function procesarSubida() {
+
+        if (input.files.length === 0) {
+          divEstado.className = "error";
+          divEstado.textContent = "Por favor selecciona un archivo PDF primero.";
+          return;
+        }
+
+        const archivo = input.files[0];
+        if (archivo.type !== "application/pdf") {
+          divEstado.className = "error";
+          divEstado.textContent = "El archivo debe ser en formato PDF.";
+          return;
+        }
+
+        divEstado.className = "cargando";
+        divEstado.textContent = "Subiendo archivo a Google Drive, por favor espera...";
+        btnSubir.disabled = true;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const data = e.target.result.split(',')[1];
+          
+          google.script.run
+            .withSuccessHandler(function(mensaje) {
+              divEstado.className = "exito";
+              divEstado.textContent = mensaje;
+              setTimeout(function() {
+                google.script.host.close();
+              }, 2000);
+            })
+            .withFailureHandler(function(error) {
+              divEstado.className = "error";
+              divEstado.textContent = "Error: " + (error.message || error);
+              btnSubir.disabled = false;
+            })
+            .guardarPdfEnDriveYEnlazar(data, archivo.name);
+        };
+
+        reader.readAsDataURL(archivo);
+      }
+
+      btnSubir.addEventListener("click", procesarSubida);
+    </script>
+  </body>
+</html>

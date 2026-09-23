@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formato de Atención a Usuarios - Proceso Informático</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background: #f6f8fb url("https://lh3.googleusercontent.com/d/1Gf0MdTkqZzOAXNcX6NVH8Onj9Y_COpWc") no-repeat left center fixed;
+        background-size: cover;
+        position: relative;
+        min-height: 100vh;
+        font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #1e2a44;
+      }
+
+
+      .page-content {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 2rem 2.75rem 3rem;
+      }
+
+      .form-wrapper {
+        width: min(72vw, 1200px);
+        margin-left: auto;
+      }
+
+      @media (max-width: 991.98px) {
+        .page-content {
+          padding: 1.5rem 1.25rem 2rem;
+          justify-content: center;
+        }
+
+        .form-wrapper {
+          width: min(100%, 980px);
+        }
+      }
+
+      .card {
+        border: 0;
+        box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 26px;
+        padding: 2.25rem 2.5rem;
+        animation: riseIn 600ms ease-out;
+      }
+
+      .brand-logo {
+        width: clamp(100px, 10vw, 150px); /* Tamaño reducido */
+        height: auto;
+      }
+
+      .brand-header {
+        display: flex;
+        flex-direction: row; 
+        align-items: center; 
+        gap: 1.5rem; 
+        padding-bottom: 0.75rem;
+        /* Aquí cambiamos el color a un azul fuerte y la hacemos un poco más gruesa */
+        border-bottom: 2px solid #4785e5;
+      }
+
+      .brand-header h1 {
+        font-weight: 700;
+        font-size: 2.4rem; /* Tamaño de letra mucho más grande */
+        letter-spacing: 0.01em;
+        color: #1e2a44; /* Color del texto */
+        text-transform: uppercase; /* Asegura que esté en mayúsculas */
+      }
+
+      .brand-header p {
+        font-size: 0.9rem;
+        color: #5f6f8d;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+
+      .section-title {
+        font-weight: 600;
+        color: #24314f;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .section-title::before {
+        content: "";
+        width: 36px;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #1f4ea7, #2f7edb);
+      }
+
+      .section-block {
+        border: 1px solid #e1e8f3;
+        border-radius: 18px;
+        padding: 1.25rem;
+        background: linear-gradient(180deg, #fbfdff, #f5f8ff);
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: #121e38;
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+      }
+
+      .form-control::placeholder {
+        color: #9ba7bd; /* Color gris/azul claro */
+        opacity: 1; /* Asegura que el navegador aplique el color exacto */
+        font-weight: 400; /* Asegura que la letra no sea gruesa */
+      }
+
+      .form-control,
+      .form-select {
+        border: none; /* Quita todos los bordes */
+        border-bottom: 2px solid #dbe4f2; /* Agrega solo la línea inferior */
+        border-radius: 0; /* Quita las esquinas redondeadas */
+        background-color: transparent; /* Quita el fondo blanco para que se fusione */
+        padding-left: 0; /* Alinea el texto del input con el título (label) */
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border: none; /* Asegura que no reaparezca el cuadro */
+        border-bottom: 2px solid #4785e5; /* Pinta la línea inferior de azul al hacer clic */
+        box-shadow: none; /* Elimina el resplandor azul por defecto de Bootstrap */
+        background-color: transparent;
+      }
+
+      .status-text {
+        min-height: 24px;
+      }
+
+      .footer-note {
+        margin-top: 1.5rem;
+        font-size: 0.85rem;
+        color: #6b7a96;
+        text-align: center;
+      }
+
+      .hidden-signature {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .icono-categoria {
+        color: #11489b !important; /* Azul oscuro (el mismo color de tus etiquetas) */
+        font-size: 1.9rem; /* Aumenta el tamaño (puedes subirlo a 1.5 o 1.6 si lo quieres más grande) */
+        vertical-align: middle; /* Mantiene el icono alineado con el texto */
+      }
+
+      #proteccionDatosAceptada + .form-check-label {
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <div class="form-wrapper">
+        <div class="card">
+            <div class="brand-header mb-3">
+              <div class="flex-grow-1 text-center">
+                <!-- Se eliminó la clase h4 para permitir que el CSS controle el tamaño grande -->
+                <h1 class="mb-1"><i class="bi-person-workspace me-2" style="color: #1f4ea7; font-size: 5rem;"></i> REGISTRO DE SOPORTE Y MANTENIMIENTO</h1>
+              </div>
+              <img src="https://lh3.googleusercontent.com/d/17IJhWSx9lkvC66pYGSMvFn7YBLsYMrqu" alt="Fundación Conexión Salud" class="brand-logo" />
+            </div>
+
+            <form id="formularioAtencion" class="row g-3">
+              <div class="col-md-3">
+                <label for="idSolicitud" class="form-label">ID Solicitud</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="idSolicitud"
+                  name="idSolicitud"
+                  placeholder="Se asigna al enviar"
+                  readonly
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="fechaAtencion" class="form-label">Fecha Atención</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fechaAtencion"
+                  name="fechaAtencion"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="sede" class="form-label">Sede o sucursal</label>
+                <select class="form-select" id="sede" name="sede" required>
+                  <option value="" selected disabled>Seleccione una sede</option>
+                  <option value="sede 22 cronicos">Sede 22 Cronicos</option>
+                  <option value="sede 34 optica (administrativos)">Sede 34 Optica (Administrativos)</option>
+                  <option value="sede 35 artritis">Sede 35 Artritis</option>
+                  <option value="sede popayan">Sede Popayan</option>
+                  <option value="sede putumayo">Sede Putumayo</option>
+                  <option value="sede Buenabentura">Sede Buenaventura</option>
+                  <option value="sede cali">Sede Cali</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="tipoEquipo" class="form-label">Tipo de equipo</label>
+                  <select class="form-select" id="tipoEquipo" name="tipoEquipo" required>
+                    <option value="" selected disabled>Seleccione tipo de equipo</option>
+                    <option value="Computador todo en uno">Computador todo en uno</option>
+                    <option value="Computador de Escritorio">Computador de Escritorio</option>
+                    <option value="Portátil">Portátil</option>
+                    <option value="Impresora">Impresora</option>
+                    <option value="Servidor">Servidor</option>
+                    <option value="Switch / Router / Redes">Switch / Router / Redes</option>
+                    <option value="Escáner">Escáner</option>
+                    <option value="UPS">UPS</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+              </div>
+              <div class="col-md-3">
+                <label for="equipo" class="form-label">Nombre o Serial</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="equipo"
+                  name="equipo"
+                  placeholder="PC-SOPORTE05"
+                  maxlength="60"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="tipoMantenimiento" class="form-label">Tipo de mantenimiento</label>
+                <select class="form-select" id="tipoMantenimiento" name="tipoMantenimiento" required>
+                  <option value="" selected disabled>Seleccione una opción</option>
+                  <option value="Preventivo">Preventivo</option>
+                  <option value="Correctivo">Correctivo</option>
+                  <option value="Seguimiento">Seguimiento</option>
+                </select>
+              </div>
+              
+
+              <div class="col-md-3">
+                <label for="servidorPublico" class="form-label">Profesional / Usuario</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="servidorPublico"
+                  name="servidorPublico"
+                  maxlength="80"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="servidorCedula" class="form-label">Cédula del Profesional / Usuario</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="servidorCedula"
+                  name="servidorCedula"
+                  maxlength="15"
+                  inputmode="numeric"
+                  pattern="\d{5,15}"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="areaEntidad" class="form-label">Área o Entidad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="areaEntidad"
+                  name="areaEntidad"
+                  maxlength="80"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="servidorCargo" class="form-label">Cargo del Profesional / Usuario</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="servidorCargo"
+                  name="servidorCargo"
+                  maxlength="80"
+                  required
+                />
+              </div>
+
+              <div class="col-md-3">
+                <label for="tecnicoNombre" class="form-label">Nombre del Técnico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tecnicoNombre"
+                  name="tecnicoNombre"
+                  maxlength="80"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="tecnicoCedula" class="form-label">Cédula del Técnico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tecnicoCedula"
+                  name="tecnicoCedula"
+                  maxlength="15"
+                  inputmode="numeric"
+                  pattern="\d{5,15}"
+                  required
+                />
+              </div>
+
+              <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción del Requerimiento</label>
+                <textarea
+                  class="form-control"
+                  id="descripcion"
+                  name="descripcion"
+                  rows="2"
+                  maxlength="500"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="col-12">
+                <!-- <div class="section-title mb-2">2. Clasificación de la actividad / requerimiento</div> -->
+                <div class="section-block">
+                  <div class="row g-3">
+                    <div class="col-lg-4">
+                      <div class="text-uppercase text-muted small mb-2"><i class="bi bi-motherboard icono-categoria me-2"></i>Hardware</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-14"
+                          name="clasificacion"
+                          value="C14"
+                          data-label="Hardware - Activar / instalar punto de voz / datos"
+                        />
+                        <label class="form-check-label" for="hw-14">
+                          Activar / instalar punto de voz / datos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-15"
+                          name="clasificacion"
+                          value="C15"
+                          data-label="Hardware - Ajuste Conector"
+                        />
+                        <label class="form-check-label" for="hw-15">Ajuste Conector</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-16"
+                          name="clasificacion"
+                          value="C16"
+                          data-label="Hardware - Conexión punto de voz / datos"
+                        />
+                        <label class="form-check-label" for="hw-16">
+                          Conexión punto de voz / datos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-17"
+                          name="clasificacion"
+                          value="C17"
+                          data-label="Hardware - Ejecución de plan de contingencias"
+                        />
+                        <label class="form-check-label" for="hw-17">
+                          Ejecución de plan de contingencias
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-18"
+                          name="clasificacion"
+                          value="C18"
+                          data-label="Hardware - Instalación de equipos"
+                        />
+                        <label class="form-check-label" for="hw-18">Instalación de equipos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-19"
+                          name="clasificacion"
+                          value="C19"
+                          data-label="Hardware - Instalación y/o configuración de impresoras"
+                        />
+                        <label class="form-check-label" for="hw-19">
+                          Instalación y/o configuración de impresoras
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-20"
+                          name="clasificacion"
+                          value="C20"
+                          data-label="Hardware - Instalación de periféricos"
+                        />
+                        <label class="form-check-label" for="hw-20">Instalación de periféricos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-21"
+                          name="clasificacion"
+                          value="C21"
+                          data-label="Hardware - Mantenimiento preventivo"
+                        />
+                        <label class="form-check-label" for="hw-21">Mantenimiento preventivo</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-22"
+                          name="clasificacion"
+                          value="C22"
+                          data-label="Hardware - Mantenimiento correctivo"
+                        />
+                        <label class="form-check-label" for="hw-22">Mantenimiento correctivo</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-23"
+                          name="clasificacion"
+                          value="C23"
+                          data-label="Hardware - Revisión conectividad"
+                        />
+                        <label class="form-check-label" for="hw-23">Revisión conectividad</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-24"
+                          name="clasificacion"
+                          value="C24"
+                          data-label="Hardware - Revisión punto eléctrico"
+                        />
+                        <label class="form-check-label" for="hw-24">Revisión punto eléctrico</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-25"
+                          name="clasificacion"
+                          value="C25"
+                          data-label="Hardware - Revisión punto de voz / datos"
+                        />
+                        <label class="form-check-label" for="hw-25">
+                          Revisión punto de voz / datos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-26"
+                          name="clasificacion"
+                          value="C26"
+                          data-label="Hardware - Traslado puntos de voz / datos"
+                        />
+                        <label class="form-check-label" for="hw-26">
+                          Traslado puntos de voz / datos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="hw-27"
+                          name="clasificacion"
+                          value="C27"
+                          data-label="Hardware - Traslado de equipos"
+                        />
+                        <label class="form-check-label" for="hw-27">Traslado de equipos</label>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="text-uppercase text-muted small mb-2"><i class="bi bi-window-sidebar icono-categoria me-1"></i>Software</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-14"
+                          name="clasificacion"
+                          value="F14"
+                          data-label="Software - Administración de novedades"
+                        />
+                        <label class="form-check-label" for="sw-14">Administración de novedades</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-15"
+                          name="clasificacion"
+                          value="F15"
+                          data-label="Software - Cambio de clave de red"
+                        />
+                        <label class="form-check-label" for="sw-15">Cambio de clave de red</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-16"
+                          name="clasificacion"
+                          value="F16"
+                          data-label="Software - Cambio clave de correo"
+                        />
+                        <label class="form-check-label" for="sw-16">Cambio clave de correo</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-17"
+                          name="clasificacion"
+                          value="F17"
+                          data-label="Software - Configuración acceso a red"
+                        />
+                        <label class="form-check-label" for="sw-17">Configuración acceso a red</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-18"
+                          name="clasificacion"
+                          value="F18"
+                          data-label="Software - Configuración de perfil de usuario"
+                        />
+                        <label class="form-check-label" for="sw-18">
+                          Configuración de perfil de usuario
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-19"
+                          name="clasificacion"
+                          value="F19"
+                          data-label="Software - Configuración de correo a internet"
+                        />
+                        <label class="form-check-label" for="sw-19">
+                          Configuración de correo a internet
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-20"
+                          name="clasificacion"
+                          value="F20"
+                          data-label="Software - Creación / Restitución cuentas de correo"
+                        />
+                        <label class="form-check-label" for="sw-20">
+                          Creación / Restitución cuentas de correo
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-21"
+                          name="clasificacion"
+                          value="F21"
+                          data-label="Software - Depurar red"
+                        />
+                        <label class="form-check-label" for="sw-21">Depurar red</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-22"
+                          name="clasificacion"
+                          value="F22"
+                          data-label="Software - Mantto. equipos a red"
+                        />
+                        <label class="form-check-label" for="sw-22">Mantto. equipos a red</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-23"
+                          name="clasificacion"
+                          value="F23"
+                          data-label="Software - Operar, revisar y/o restaurar backup archivo de red"
+                        />
+                        <label class="form-check-label" for="sw-23">
+                          Operar, revisar y/o restaurar backup archivo de red
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-24"
+                          name="clasificacion"
+                          value="F24"
+                          data-label="Software - Actualización de software"
+                        />
+                        <label class="form-check-label" for="sw-24">Actualización de software</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-25"
+                          name="clasificacion"
+                          value="F25"
+                          data-label="Software - Configuración / ajuste de archivos"
+                        />
+                        <label class="form-check-label" for="sw-25">
+                          Configuración / ajuste de archivos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-26"
+                          name="clasificacion"
+                          value="F26"
+                          data-label="Software - Corrección de archivos"
+                        />
+                        <label class="form-check-label" for="sw-26">Corrección de archivos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-27"
+                          name="clasificacion"
+                          value="F27"
+                          data-label="Software - Depuración de equipos"
+                        />
+                        <label class="form-check-label" for="sw-27">Depuración de equipos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-28"
+                          name="clasificacion"
+                          value="F28"
+                          data-label="Software - Eliminación de virus"
+                        />
+                        <label class="form-check-label" for="sw-28">Eliminación de virus</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-29"
+                          name="clasificacion"
+                          value="F29"
+                          data-label="Software - Escaneo de documentos o fotos"
+                        />
+                        <label class="form-check-label" for="sw-29">
+                          Escaneo de documentos o fotos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-30"
+                          name="clasificacion"
+                          value="F30"
+                          data-label="Software - Exportación de informes"
+                        />
+                        <label class="form-check-label" for="sw-30">Exportación de informes</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-31"
+                          name="clasificacion"
+                          value="F31"
+                          data-label="Software - Inducción en manejo de programas"
+                        />
+                        <label class="form-check-label" for="sw-31">
+                          Inducción en manejo de programas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-32"
+                          name="clasificacion"
+                          value="F32"
+                          data-label="Software - Instalación / configuración de software"
+                        />
+                        <label class="form-check-label" for="sw-32">
+                          Instalación / configuración de software
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-33"
+                          name="clasificacion"
+                          value="F33"
+                          data-label="Software - Recuperación de archivos"
+                        />
+                        <label class="form-check-label" for="sw-33">Recuperación de archivos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sw-34"
+                          name="clasificacion"
+                          value="F34"
+                          data-label="Software - Otras actividades"
+                        />
+                        <label class="form-check-label" for="sw-34">Otras actividades</label>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="text-uppercase text-muted small mb-2"><i class="bi bi-server icono-categoria me-1"></i>Sistemas</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-28"
+                          name="clasificacion"
+                          value="C28"
+                          data-label="Sistemas - Desarrollo y/o Implantación Sistemas de Información"
+                        />
+                        <label class="form-check-label" for="sis-28">
+                          Desarrollo y/o Implantación Sistemas de Información
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-29"
+                          name="clasificacion"
+                          value="C29"
+                          data-label="Sistemas - Generar, revisar y/o restaurar backup de bases de datos"
+                        />
+                        <label class="form-check-label" for="sis-29">
+                          Generar, revisar y/o restaurar backup de bases de datos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-30"
+                          name="clasificacion"
+                          value="C30"
+                          data-label="Sistemas - Generar y/o restaurar backup de página web"
+                        />
+                        <label class="form-check-label" for="sis-30">
+                          Generar y/o restaurar backup de página web
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-31"
+                          name="clasificacion"
+                          value="C31"
+                          data-label="Sistemas - Inducción en manejo de aplicaciones"
+                        />
+                        <label class="form-check-label" for="sis-31">
+                          Inducción en manejo de aplicaciones
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-32"
+                          name="clasificacion"
+                          value="C32"
+                          data-label="Sistemas - Mantenimientos aplicativos"
+                        />
+                        <label class="form-check-label" for="sis-32">Mantenimientos aplicativos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-33"
+                          name="clasificacion"
+                          value="C33"
+                          data-label="Sistemas - Mantenimientos bases de datos"
+                        />
+                        <label class="form-check-label" for="sis-33">Mantenimientos bases de datos</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-34"
+                          name="clasificacion"
+                          value="C34"
+                          data-label="Sistemas - Migraciones páginas web"
+                        />
+                        <label class="form-check-label" for="sis-34">Migraciones páginas web</label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-35"
+                          name="clasificacion"
+                          value="C35"
+                          data-label="Sistemas - Publicación (Intranet, Meci - Calidad o Página web)"
+                        />
+                        <label class="form-check-label" for="sis-35">
+                          Publicación (Intranet, Meci - Calidad o Página web)
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="sis-36"
+                          name="clasificacion"
+                          value="C36"
+                          data-label="Sistemas - Soporte aplicativos"
+                        />
+                        <label class="form-check-label" for="sis-36">Soporte aplicativos</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="diagnostico" class="form-label">Diagnóstico y Justificación</label>
+                <textarea
+                  class="form-control"
+                  id="diagnostico"
+                  name="diagnostico"
+                  rows="2"
+                  maxlength="500"
+                  required
+                ></textarea>
+              </div>
+              <div class="col-md-6">
+                <label for="herramientasUtilizadas" class="form-label">Herramientas utilizadas</label>
+                <textarea
+                  class="form-control"
+                  id="herramientasUtilizadas"
+                  name="herramientasUtilizadas"
+                  rows="2"
+                  maxlength="500"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="col-md-2">
+                <label for="soporteExterno" class="form-label">¿Requiere Soporte Externo?</label>
+                <select class="form-select" id="soporteExterno" name="soporteExterno">
+                  <option value="No" selected>No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              
+              <div class="col-md-5">
+                <label for="soporteExternoObservaciones" class="form-label">
+                  Observaciones de soporte externo
+                </label>
+                <textarea
+                  class="form-control"
+                  id="soporteExternoObservaciones"
+                  name="soporteExternoObservaciones"
+                  rows="2"
+                  maxlength="500"
+                ></textarea>
+              </div>
+
+              <div class="col-md-5">
+                <label for="expectativas" class="form-label">Expectativas del servicio</label>
+                <textarea
+                  class="form-control"
+                  id="expectativas"
+                  name="expectativas"
+                  rows="2"
+                  maxlength="300"
+                ></textarea>
+              </div>
+
+              <div class="col-md-4">
+                <label for="resolvioNecesidad" class="form-label">¿Resolvió Necesidad? <span class="text-danger">*</span></label>
+                <select class="form-select" id="resolvioNecesidad" name="resolvioNecesidad" required>
+                  <option value="" disabled selected hidden>Seleccione una opción...</option>
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label for="estadoCaso" class="form-label">Estado del caso</label>
+                <select class="form-select" id="estadoCaso" name="estadoCaso" required>
+                  <option value="Abierto" selected>Abierto</option>
+                  <option value="En proceso">En proceso</option>
+                  <option value="Cerrado">Cerrado</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="fechaCierre" class="form-label">Fecha de cierre</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fechaCierre"
+                  name="fechaCierre"
+                  disabled
+                />
+              </div>
+
+
+              <div class="col-12">
+                <div class="section-title mb-2">Evidencia fotografica</div>
+                <div class="section-block">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="fotosEvidencia" class="form-label">
+                        Fotos del mantenimiento (puede seleccionar varias)
+                      </label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="fotosEvidencia"
+                        name="fotosEvidencia"
+                        accept="image/jpeg,image/png,image/webp"
+                        multiple
+                      />
+                      <div class="form-text" id="fotoIndicador">0 fotos · 0 MB</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="section-title mb-2">Proteccion de datos personales</div>
+                <div class="section-block">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="proteccionDatosAceptada"
+                      name="proteccionDatosAceptada"
+                      required
+                    />
+                    <label class="form-check-label" for="proteccionDatosAceptada">
+                      <strong>Acepto</strong> que, en cumplimiento de lo estipulado en el contrato de trabajo celebrado con FUNDACION CONEXIÓN SALUD MAESVI identificada con NIT 901645134-5 (en adelante, "LA EMPRESA"), en virtud de la política de tratamiento de mis datos personales de acuerdo con las siguientes condiciones: Autorizo a LA EMPRESA para que, en el desarrollo de sus funciones y políticas de seguridad informática, recolecte, almacene, use, procese, circule, audite y elimine la información y los datos personales que sean generados, recibidos, transmitidos o almacenados en los equipos de cómputo, dispositivos móviles, correos electrónicos habilitados por LA EMPRESA y redes corporativas de propiedad de LA EMPRESA o puestos a mi disposición para el ejercicio de mis funciones.
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
+                <button type="submit" class="btn btn-primary" id="btnEnviar">
+                  Enviar
+                </button>
+                <span id="estado" class="text-muted status-text"></span>
+              </div>
+            </form>
+            <div class="footer-note">&copy; 2026 Fundaci&#243;n Conexi&#243;n Salud. Todos los derechos reservados.</div>
+            <span class="hidden-signature" aria-hidden="true">EUARCHIN</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("formularioAtencion");
+      const btnEnviar = document.getElementById("btnEnviar");
+      const estado = document.getElementById("estado");
+      const idSolicitud = document.getElementById("idSolicitud");
+      const fechaAtencion = document.getElementById("fechaAtencion");
+      const fotosEvidencia = document.getElementById("fotosEvidencia");
+      const soporteExterno = document.getElementById("soporteExterno");
+      const soporteExternoObservaciones = document.getElementById(
+        "soporteExternoObservaciones"
+      );
+      const expectativas = document.getElementById("expectativas");
+      const estadoCaso = document.getElementById("estadoCaso");
+      const fechaCierre = document.getElementById("fechaCierre");
+      const fotoIndicador = document.getElementById("fotoIndicador");
+      const proteccionDatosAceptada = document.getElementById("proteccionDatosAceptada");
+
+      const MAX_FOTOS = 5;
+      const MAX_FOTO_BYTES = 3 * 1024 * 1024;
+      const TIPOS_FOTO_VALIDOS = ["image/jpeg", "image/png", "image/webp"];
+      const LIMITES_TEXTO = {
+        idSolicitud: 20,
+        fechaAtencion: 10,
+        sede: 80,
+        tipoEquipo: 80,
+        equipo: 60,
+        tipoMantenimiento: 20,
+        herramientasUtilizadas: 500,
+        servidorPublico: 80,
+        servidorCedula: 15,
+        servidorCargo: 80,
+        areaEntidad: 80,
+        tecnicoNombre: 80,
+        tecnicoCedula: 15,
+        descripcion: 500,
+        diagnostico: 500,
+        soporteExterno: 3,
+        soporteExternoObservaciones: 500,
+        resolvioNecesidad: 3,
+        proteccionDatosAceptada: 3,
+        estadoCaso: 12,
+        fechaCierre: 10,
+        expectativas: 300,
+      };
+
+      const setDefaultDate = () => {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        fechaAtencion.value = `${yyyy}-${mm}-${dd}`;
+      };
+
+      const syncSoporteExterno = () => {
+        if (soporteExterno?.value === "No") {
+          // Si es NO, llenamos con "No aplica" y los bloqueamos (solo lectura)
+          soporteExternoObservaciones.value = "No aplica";
+          expectativas.value = "No aplica";
+          soporteExternoObservaciones.readOnly = true;
+          expectativas.readOnly = true;
+        } else {
+          // Si es SÍ, limpiamos el texto "No aplica" y habilitamos la escritura
+          if (soporteExternoObservaciones.value === "No aplica") {
+            soporteExternoObservaciones.value = "";
+          }
+          if (expectativas.value === "No aplica") {
+            expectativas.value = "";
+          }
+          soporteExternoObservaciones.readOnly = false;
+          expectativas.readOnly = false;
+        }
+      };
+      
+      const syncEstadoCaso = () => {
+        const cerrado = estadoCaso?.value === "Cerrado";
+        if (fechaCierre) {
+          fechaCierre.disabled = !cerrado;
+          fechaCierre.required = cerrado;
+          if (cerrado && !fechaCierre.value) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, "0");
+            const dd = String(today.getDate()).padStart(2, "0");
+            fechaCierre.value = `${yyyy}-${mm}-${dd}`;
+          }
+          if (!cerrado) {
+            fechaCierre.value = "";
+          }
+        }
+      };
+
+      const actualizarIndicadorFotos = () => {
+        if (!fotoIndicador) {
+          return;
+        }
+        const archivos = Array.from(fotosEvidencia?.files || []);
+        const totalBytes = archivos.reduce((sum, file) => sum + file.size, 0);
+        const totalMb = totalBytes / (1024 * 1024);
+        const totalTexto = totalBytes ? totalMb.toFixed(2) : "0";
+        fotoIndicador.textContent = `${archivos.length} fotos · ${totalTexto} MB`;
+      };
+
+      const mostrarError = (mensaje) => {
+        estado.textContent = mensaje;
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar";
+      };
+
+      const validarLongitudes = () => {
+        for (const [fieldName, maxLength] of Object.entries(LIMITES_TEXTO)) {
+          const field = form.elements[fieldName];
+          if (field && String(field.value || "").length > maxLength) {
+            mostrarError(`El campo ${fieldName} supera ${maxLength} caracteres.`);
+            return false;
+          }
+        }
+        return true;
+      };
+
+
+      const leerArchivosComoBase64 = (files) => {
+        const list = Array.from(files || []);
+        if (!list.length) {
+          return Promise.resolve([]);
+        }
+
+        return Promise.all(
+          list.map(
+            (file) =>
+              new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  const result = String(reader.result || "");
+                  const base64 = result.split(",")[1] || "";
+                  resolve({
+                    name: file.name,
+                    mimeType: file.type || "image/jpeg",
+                    data: base64,
+                  });
+                };
+                reader.onerror = () => reject(new Error("No se pudo leer la foto."));
+                reader.readAsDataURL(file);
+              })
+          )
+        );
+      };
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!proteccionDatosAceptada?.checked) {
+          mostrarError("Debe aceptar la protección de datos personales para continuar.");
+          return;
+        }
+        if (!validarLongitudes()) {
+          return;
+        }
+
+        btnEnviar.disabled = true;
+        btnEnviar.textContent = "Procesando...";
+        estado.textContent = "Preparando evidencia";
+
+        const rawData = new FormData(form);
+        const formData = {};
+        rawData.forEach((value, key) => {
+          formData[key] = value;
+        });
+
+        // Capturar los checkboxes seleccionados
+        const seleccion = Array.from(
+          form.querySelectorAll('input[name="clasificacion"]:checked')
+        );
+
+        // Separar las selecciones por categoría según el prefijo (Hardware, Software, Sistemas)
+        const hardwareArr = [];
+        const softwareArr = [];
+        const sistemasArr = [];
+
+        seleccion.forEach((input) => {
+          const label = input.dataset.label || input.value;
+          if (label.startsWith("Hardware")) {
+            hardwareArr.push(label.replace("Hardware - ", ""));
+          } else if (label.startsWith("Software")) {
+            softwareArr.push(label.replace("Software - ", ""));
+          } else if (label.startsWith("Sistemas")) {
+            sistemasArr.push(label.replace("Sistemas - ", ""));
+          }
+        });
+
+        // Asignar los arreglos procesados
+        formData.hardware = hardwareArr;
+        formData.software = softwareArr;
+        formData.sistemas = sistemasArr;
+
+        const clasificacionCeldas = seleccion.map((input) => input.value);
+        const clasificacionTexto = seleccion.map(
+          (input) => input.dataset.label || input.value
+        );
+
+        formData.clasificacionCeldas = clasificacionCeldas.join(",");
+        formData.clasificacionTexto = clasificacionTexto.join(" | ");
+        formData.proteccionDatosAceptada = true;
+
+        if (soporteExterno?.value === "Sí") {
+          const observaciones = soporteExternoObservaciones?.value?.trim();
+          if (!observaciones) {
+            mostrarError("Indique observaciones de soporte externo.");
+            return;
+          }
+        }
+
+        if (estadoCaso?.value === "Cerrado" && !fechaCierre?.value) {
+          mostrarError("Indique la fecha de cierre.");
+          return;
+        }
+
+        const fotosList = Array.from(fotosEvidencia?.files || []);
+        if (fotosList.length > MAX_FOTOS) {
+          mostrarError(`Maximo ${MAX_FOTOS} fotos permitidas.`);
+          return;
+        }
+        if (fotosList.some((file) => !TIPOS_FOTO_VALIDOS.includes(file.type))) {
+          mostrarError("Solo se permiten fotos JPG, PNG o WEBP.");
+          return;
+        }
+        if (fotosList.some((file) => file.size > MAX_FOTO_BYTES)) {
+          mostrarError("Hay fotos que superan 3 MB.");
+          return;
+        }
+
+        leerArchivosComoBase64(fotosEvidencia?.files)
+          .then((fotos) => {
+            formData.fotosEvidencia = fotos;
+            estado.textContent = "Enviando solicitud";
+            google.script.run
+              .withSuccessHandler((nuevoId) => {
+                estado.textContent = nuevoId
+                  ? `Solicitud enviada correctamente. ID: ${nuevoId}`
+                  : "Solicitud enviada correctamente";
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = "Enviar";
+                form.reset();
+                setDefaultDate();
+                syncEstadoCaso();
+                actualizarIndicadorFotos();
+                idSolicitud.value = "";
+                syncSoporteExterno();
+              })
+              .withFailureHandler((error) => {
+                estado.textContent = `Error: ${error.message || error}`;
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = "Enviar";
+              })
+              .procesarFormularioWeb(formData);
+          })
+          .catch((error) => {
+            mostrarError(error.message || "Error al leer las fotos.");
+          });
+      });
+
+      setDefaultDate();
+      syncEstadoCaso();
+      actualizarIndicadorFotos();
+      syncSoporteExterno();
+
+      estadoCaso?.addEventListener("change", syncEstadoCaso);
+      fotosEvidencia?.addEventListener("change", actualizarIndicadorFotos);
+      soporteExterno?.addEventListener("change", syncSoporteExterno);
+    </script>
+  </body>
+</html>
